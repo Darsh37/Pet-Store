@@ -16,7 +16,7 @@ public @interface Phone {
 
     //Need these proper for working of the validator
     Class<?>[] groups() default{};
-    Class<? extends Payload>[] Payload() default{};
+    Class<? extends Payload>[] payload() default{};
 
     
 }

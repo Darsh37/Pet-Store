@@ -1,6 +1,11 @@
 package com.petstoreapp.petapp.Entities;
 
+import java.time.Instant;
+import java.util.List;
+
+
 import org.apache.logging.log4j.CloseableThreadContext.Instance;
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -12,6 +17,10 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -20,6 +29,7 @@ import lombok.Data;
 
 @Data
 @Entity
+
 // @Table(name="product")
 @EntityListeners(AuditingEntityListener.class)
 public class Product {
@@ -35,17 +45,28 @@ public class Product {
     private String name;
 
     @Min(value = 0)
-    @Max(value = 400)
+    @Max(value = 4000)
     private Double price;
     private String description;
     
     @CreatedDate
-    @Column(nullable = false, updatable = false)
-    private Instance CreateAt;
+    @Column(updatable = false)
+    private Instant CreateAt;
     @LastModifiedDate
-    private Instance updateAt;
-    
+    private Instant updateAt;
 
-    
+    //one categorycan have ma
+    @ManyToOne
+    @JoinColumn(name="category_id")
+    private Category category;
+
+    @ManyToMany
+    @JoinTable(name="product_ordres", 
+    joinColumns = @JoinColumn(name="product_id", referencedColumnName = "id"), 
+    inverseJoinColumns = @JoinColumn(name="order_id", referencedColumnName = "id") )
+    private List<Orders> orders;
+  
+    //In this field we will save the download URL for the image
+    private String imgUrl;
 
 }

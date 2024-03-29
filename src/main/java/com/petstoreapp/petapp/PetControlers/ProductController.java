@@ -25,7 +25,7 @@ import com.petstoreapp.petapp.Services.ProductService;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 
-@RestController
+// @RestController
 public class ProductController {
 
     @Autowired
@@ -82,9 +82,6 @@ public class ProductController {
     
 
         }
-
-
-
 
     
 }

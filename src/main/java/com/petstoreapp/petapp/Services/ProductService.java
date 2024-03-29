@@ -18,8 +18,6 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    
-
 
     // private Map<Integer, Product> productMap = new HashMap<>();
     // private AtomicInteger atomic = new AtomicInteger();
@@ -51,7 +49,6 @@ public class ProductService {
         
 
     }
-
 
     
 }

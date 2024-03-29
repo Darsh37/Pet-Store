@@ -1,14 +1,19 @@
 package com.petstoreapp.petapp.Repository;
 
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 import com.petstoreapp.petapp.Entities.User;
+import com.petstoreapp.petapp.Entities.UserProjection1;
+
 import java.util.List;
 
 
-@Repository
+@RepositoryRestResource(excerptProjection = UserProjection1.class)
+
 public interface UserRepository extends CrudRepository<User, Integer> {
     //query methods -> methods in the repository,
     //created as per the structure of the entity

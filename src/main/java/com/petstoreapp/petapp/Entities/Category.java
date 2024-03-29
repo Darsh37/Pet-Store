@@ -1,6 +1,7 @@
 package com.petstoreapp.petapp.Entities;
 
 import java.time.Instant;
+import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -12,33 +13,25 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 @Data
-public class Address {
-
+@EntityListeners(AuditingEntityListener.class)
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id;
+    private Integer id;
+    
+    private String name;
 
-    private String city;
-    private String state;
-    private String country;
-
-    @CreatedDate
+     @CreatedDate
     @Column(updatable = false)
-    private Instant createdAt;
+    private Instant CreateAt;
     @LastModifiedDate
-    private Instant updatedAt;
+    private Instant updateAt;
 
-    //one address belongs to only one user
-    @OneToOne(mappedBy =  "addr")
-   //by default, spring boot will create the foreign key column
-    //that refers the id of the User in the address table too
-    //to avoid this we can use mappedBy property
-
-    private User user;
+    @OneToMany(mappedBy = "category")
+    private List<Product> Products;
 }
